@@ -1,0 +1,152 @@
+import java.util.* ;
+import java.io.*; 
+public class Deque 
+{
+ 
+    int arr[];
+    int front,rear;
+    int size;
+    int x;
+    public Deque(int n) 
+    {
+        
+        size=n;
+        arr=new int[n];
+        front=-1;
+        rear=-1;
+
+    }
+
+   
+    public boolean pushFront(int x) 
+    {
+        
+        if(isFull())
+            return false;
+        if(front==-1)
+        {
+            front=0;
+            rear=0;
+        }
+        else if(front==0)
+     
+            front=size-1;
+      
+        else
+            front=(front-1)%size;
+        arr[front]=x;
+         return true;
+    }
+
+  
+    public boolean pushRear(int x) 
+    {
+        if(isFull())
+            return false;
+        rear=(rear+1)%size;
+        if(front==-1)
+         front=0;
+       
+        arr[rear]=x;
+        return true;
+    }
+
+    public int popFront() 
+    {
+       
+        if(isEmpty())
+         return -1;
+        x=arr[front];
+
+        if(front==rear)
+        {
+            front=-1;
+            rear=-1;
+        }
+        else
+        {
+            if(front==size-1)
+              front=0;
+            else 
+                front=(front+1)%size;
+        
+        }
+        
+        return x;
+        
+    }
+
+   
+    public int popRear() 
+    {
+        
+        if(isEmpty())
+         return -1;
+      
+        x=arr[rear];
+        if(front==rear)
+        {
+            front=-1;
+            rear=-1;
+        }
+        else
+        {
+            if(rear==0)
+          
+                rear=size-1;
+            else
+                rear=(rear-1)%size;
+          
+        }
+        
+        return x;
+    }
+
+
+    public int getFront() 
+    {
+      
+        if(isEmpty())
+            return -1;
+        else
+            return arr[front];
+
+    }
+
+  
+    public int getRear() 
+    {
+ 
+        if(isEmpty())
+            return -1;
+        else
+        return arr[rear];
+      
+    }
+
+   
+    public boolean isEmpty() 
+    {
+      
+        if(front==-1)
+       
+            return true;
+        
+        else
+            return false;
+        
+    }
+
+
+    public boolean isFull() 
+    {
+       
+        if((rear+1)%size==front) 
+    
+            return true;
+    
+        else
+            return false;
+        
+    }
+}
